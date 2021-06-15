@@ -5,9 +5,10 @@ let currentTeam = "Manchester FC";
 let trophiesWon = 27;
 
 //Write your function here
-function createManager()
+function createManager(managerName, managerAge, currentTeam, trophiesWon)
 {
-  return [managerName, managerAge, currentTeam, trophiesWon];
+  let manager = [managerName, managerAge, currentTeam, trophiesWon];
+  return manager;
 }
 // Don't edit the following code
 try {
@@ -25,9 +26,9 @@ try {
 var formation = [4, 4, 3];
 
 //write your function here
-function createFormation()
+function createFormation(formation)
 {
-  return obj = {
+  return formation == 0 ? null : {
     defender: formation[0],
     midfield: formation[1],
     forward: formation[2]
@@ -90,12 +91,61 @@ function filterByAward(awardName)
 //Progression 6 - Filter players that won ______ award ____ times
 function filterByAwardxTimes(awardName, noOfTimes)
 {
-  
+  let number = 0;
+  let awardxPlayers = [];
+  for(let i=0; i<players.length; i++)
+  {
+    for(let j=0; j<players[i].awards.length; j++)
+    {
+      if(players[i].awards[j].name==awardName)
+      {
+        number++;
+        if(number==noOfTimes)
+        {
+          awardxPlayers.push(players[i]);
+        }
+      }
+    }
+  }
+  return awardxPlayers;
 }
 //Progression 7 - Filter players that won ______ award and belong to ______ country
-
+function filterByAwardxCountry(awardName, country)
+{
+  let countryPlayers = [];
+  let awardedCountryPlayers = [];
+  for(let i=0; i<players.length; i++)
+  {
+    if(players[i].country==country)
+    {
+      countryPlayers.push(players[i]);
+    }
+  }
+  for(let i=0; i<countryPlayers.length; i++)
+  {
+    for(let j=0; j<countryPlayers[i].awards.length; j++)
+    {
+      if(countryPlayers[i].awards[j].name==awardName)
+      {
+        awardedCountryPlayers.push(countryPlayers[i]);
+      }
+    }
+  }
+  return awardedCountryPlayers;
+}
 //Progression 8 - Filter players that won atleast ______ awards, belong to ______ team and are younger than ____
-
+function filterByNoOfAwardsxTeamxAge(noOfAwards, team, age)
+{
+  let awardxteamxage = [];
+  for(let i=0; i<players.length; i++)
+  {
+    if(players[i].team==team && players[i].age<age && players[i].awards.length>=noOfAwards)
+    {
+      awardxteamxage.push(players[i]);
+    }
+  }
+  return awardxteamxage;
+}
 //Progression 9 - Sort players in descending order of their age
 
 //Progression 10 - Sort players beloging to _____ team in descending order of awards won
